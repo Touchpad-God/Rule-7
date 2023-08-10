@@ -5,7 +5,7 @@ from discord.ext import commands
 from random import randint
 
 
-class Help(Select):
+class HelpMenu(Select):
     def __init__(self):
         super().__init__(custom_id="help-options",
                          options=[
@@ -98,7 +98,7 @@ class Help(commands.Cog):
 
     @app_commands.command(name="help", description="Documentation.", )
     async def help(self, interaction: discord.Interaction):
-        menu = Help()
+        menu = HelpMenu()
         view = View()
         view.add_item(menu)
 
