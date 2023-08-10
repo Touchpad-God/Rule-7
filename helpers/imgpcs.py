@@ -10,7 +10,7 @@ from dbbuilder import Database
 
 
 load_dotenv()
-dbconfig = {"host": "78.108.218.47", "database": "s103030_stats", "user": os.getenv("PROGRAM_SQL_USERNAME"), 
+dbconfig = {"host": os.getenv("HOST"), "database": "stats", "user": os.getenv("PROGRAM_SQL_USERNAME"),
             "password": os.getenv("PROGRAM_SQL_PASSWORD")}
 mydb = connector.pooling.MySQLConnectionPool(pool_name="mypool", **dbconfig, pool_size=20)
 database = Database()
