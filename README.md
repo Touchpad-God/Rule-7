@@ -12,4 +12,11 @@ Other features can be found by running the command /help.
 
 ## Invite Link
 
+Rule 7 has the following permissions:
+
+* Send Messages
+* Embed Links
+* Attach Files
+* Use Slash Commands
+
 [Invite Link](https://discord.com/api/oauth2/authorize?client_id=1051247475329081474&permissions=2147534848&scope=bot)
