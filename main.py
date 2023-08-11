@@ -1,34 +1,28 @@
-import asyncio
 import os
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
-import dbbuilder
-intents = discord.Intents.default()
 
 load_dotenv()
 token = os.getenv("TOKEN")
 
-database = dbbuilder.Database()
-bot = commands.Bot(command_prefix="/", intents=intents)
 
+class Rule7(commands.Bot):
+    def __init__(self):
+        super().__init__(
+            command_prefix="/",
+            intents=discord.Intents.default()
+        )
+    
+    async def setup_hook(self) -> None:
+        for filename in os.listdir("./cogs"):
+            if filename.endswith(".py"):
+                await bot.load_extension(f"cogs.{filename[:-3]}")
+        await bot.tree.sync()
+    
+    async def on_ready(self):
+        await bot.change_presence(activity=discord.Game("Use /add or /add-all to expand the database!"))
+        print(f'We have logged in as {bot.user}')
 
-@bot.event
-async def on_ready():
-    await bot.change_presence(activity=discord.Game("Use /add or /add-all to expand the database!"))
-    print(f'We have logged in as {bot.user}')
-
-
-async def load():
-    for filename in os.listdir("./cogs"):
-        if filename.endswith(".py"):
-            await bot.load_extension(f"cogs.{filename[:-3]}")
-
-
-async def main():
-    await load()
-    await bot.start(token)
-    await bot.tree.sync()
-
-
-asyncio.run(main())
+bot = Rule7()
+bot.run(token)
